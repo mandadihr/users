@@ -48,7 +48,7 @@ app.post("/api/SaveUser", function (req, res) {
     });
   }
   else {
-    model.findByIdAndUpdate(req.body.id, { name: req.body.firstName, name: req.body.lastName, age: req.body.age, email: req.body.email },
+    model.findByIdAndUpdate( req.body.id, { firstName: req.body.firstName, lastName: req.body.lastName, age: req.body.age, email: req.body.email },
       function (err, data) {
         if (err) {
           res.send(err);
@@ -57,8 +57,6 @@ app.post("/api/SaveUser", function (req, res) {
           res.send({ data: "Record has been Updated..!!" });
         }
       });
-
-
   }
 })
 

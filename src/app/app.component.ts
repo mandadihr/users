@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormsModule, } from '@angular/forms';
 import { CommonService } from './common.service';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { constructDependencies } from '@angular/core/src/di/reflective_provider';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,13 +16,16 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit() {
-    this.user = { id: '', firstName: '', lastName: '', age: null, email: '' };
+    this.user = {firstName: '', lastName: '', age: null, email: '' };
     this.newService.GetUser().subscribe(data => this.Repdata = data);
-    console.log(this.Repdata);
   }
 
   onSave = function (user, isValid: boolean) {
     user.mode = this.valbutton;
+    if(user.mode == "Update")
+    {
+      user.id = this.user.id;
+    }
     this.newService.saveUser(user)
       .subscribe(data => {
         alert(data.data);
@@ -29,7 +33,7 @@ export class AppComponent implements OnInit {
 
       }
         , error => this.errorMessage = error);
-        //this.valbutton = 'Save';
+        this.valbutton = 'Save';
   };
 
   edit = function (kk) {
@@ -49,9 +53,7 @@ export class AppComponent implements OnInit {
 
 }
 
-
 export interface User {
-  id: string;
   firstName: string;
   lastName: string;
   age: number;
