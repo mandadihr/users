@@ -22,8 +22,7 @@ export class AppComponent implements OnInit {
 
   onSave = function (user, isValid: boolean) {
     user.mode = this.valbutton;
-    if(user.mode == "Update")
-    {
+    if ( user.mode === 'Update') {
       user.id = this.user.id;
     }
     this.newService.saveUser(user)
