@@ -15,5 +15,5 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
   providers: [CommonService],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
 }
